@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:srhealthcare/pages/authPage/bloc/login_bloc.dart';
+import 'package:srhealthcare/pages/authPage/login_page.dart';
 import 'package:srhealthcare/pages/bottomNavigation/management/bottomNavigation_bloc.dart';
-import 'package:srhealthcare/pages/bottomNavigation/bottom_navigation.dart';
+import 'package:srhealthcare/services/authApiService/login_api_service.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,15 +12,23 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<BottomNavigationBloc>(
-      create: (context) => BottomNavigationBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<BottomNavigationBloc>(
+          create: (context) => BottomNavigationBloc(),
+        ),
+        BlocProvider<LoginBloc>(
+          create: (context) => LoginBloc(LoginApiService()),
+        ),
+      ],
       child: MaterialApp(
+        themeMode: ThemeMode.system,
         debugShowCheckedModeBanner: false,
         title: 'SR Healthcare',
         theme: ThemeData(
           primarySwatch: Colors.deepPurple,
         ),
-        home: const BottomNavigation(), // Use the BottomNavigation widget
+        home: LoginPage(), // Home page (LoginPage) with LoginCubit and BottomNavigationBloc
       ),
     );
   }
