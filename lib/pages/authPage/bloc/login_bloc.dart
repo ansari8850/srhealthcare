@@ -6,20 +6,21 @@ import 'package:srhealthcare/services/authApiService/login_api_service.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginApiService apiService;
 
-  LoginBloc(this.apiService) : super(LoginInitial());
+  LoginBloc(this.apiService) : super(LoginInitial()) {
+    on<LoginButtonPressed>((event, emit) async {
+      emit(LoginLoading());
 
-  @override
-  Stream<LoginState> mapEventToState(LoginEvent event) async* {
-    if (event is LoginButtonPressed) {
-      yield LoginLoading();
+      try {
+        final response = await apiService.login(event.email, event.password);
 
-      final response = await apiService.login(event.email, event.password);
-
-      if (response?.$1 == null && response?.$2 != null) {
-        yield LoginSuccess(response!.$2!);
-      } else {
-        yield LoginFailure(response?.$1 ?? "Login failed");
+        if (response?.$1 == null && response?.$2 != null) {
+          emit(LoginSuccess(response!.$2!)); // Use null assertion operator safely here
+        } else {
+          emit(LoginFailure(response?.$1 ?? "Login failed"));
+        }
+      } catch (e) {
+        emit(LoginFailure(e.toString())); // Catch and emit any errors
       }
-    }
+    });
   }
 }

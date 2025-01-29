@@ -12,15 +12,27 @@ import 'package:srhealthcare/pages/authPage/forget_password.dart';
 import 'package:srhealthcare/pages/bottomNavigation/bottom_navigation.dart';
 import 'package:srhealthcare/services/authApiService/login_api_service.dart';
 
-class LoginPage extends StatelessWidget {
-   LoginPage({super.key});
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => LoginBloc(LoginApiService()),
+    return BlocProvider<LoginBloc>(
+      create: (context) => LoginBloc(LoginApiService()),
       child: Scaffold(
         backgroundColor: whiteColor,
         appBar: AppBar(
@@ -28,7 +40,7 @@ class LoginPage extends StatelessWidget {
           backgroundColor: whiteColor,
         ),
         body: Padding(
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           child: ListView(
             children: [
               CustomText(
@@ -37,14 +49,14 @@ class LoginPage extends StatelessWidget {
                 fontWeight: FontWeight.w700,
                 color: blackColor,
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               CustomText(
                 text: TextConstant.loginMessage,
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
                 color: greyColor,
               ),
-              SizedBox(height: 25),
+              const SizedBox(height: 25),
               RichText(
                 text: TextSpan(
                   text: TextConstant.email,
@@ -65,8 +77,9 @@ class LoginPage extends StatelessWidget {
                   ],
                 ),
               ),
-              CustomTextField(controller: _emailController, hintText: 'Enter Email'),
-              SizedBox(height: 20),
+              CustomTextField(
+                  controller: _emailController, hintText: 'Enter Email'),
+              const SizedBox(height: 20),
               RichText(
                 text: TextSpan(
                   text: TextConstant.password,
@@ -92,7 +105,7 @@ class LoginPage extends StatelessWidget {
                 hintText: 'Enter Password',
                 obscureText: true,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Align(
                 alignment: Alignment.centerRight,
                 child: InkWell(
@@ -110,37 +123,56 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               BlocConsumer<LoginBloc, LoginState>(
                 listener: (context, state) {
                   if (state is LoginSuccess) {
                     final loginData = state.loginData;
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Welcome, ${loginData.result?.name}!")),
+                      SnackBar(
+                          content: Text("Welcome, ${loginData.result?.name}!"),
+                          duration: const Duration(seconds: 3)),
                     );
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const BottomNavigation()),
-                    );
+                    Future.delayed(const Duration(milliseconds: 500), () {
+                      // Small delay
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const BottomNavigation()),
+                      );
+                    });
                   } else if (state is LoginFailure) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(state.message)),
+                      SnackBar(
+                          content: Text(state.message),
+                          duration: const Duration(seconds: 3)),
                     );
                   }
                 },
                 builder: (context, state) {
                   if (state is LoginLoading) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   }
 
                   return InkWell(
                     onTap: () {
                       final email = _emailController.text.trim();
                       final password = _passwordController.text.trim();
+
+                      if (email.isEmpty || password.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content:
+                                  Text("Please enter both email and password."),
+                              duration: Duration(seconds: 3)),
+                        );
+                        return; 
+                      }
+
                       context.read<LoginBloc>().add(LoginButtonPressed(
-                        email: email,
-                        password: password,
-                      ));
+                            email: email,
+                            password: password,
+                          ));
                     },
                     child: Container(
                       height: 50,

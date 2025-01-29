@@ -14,7 +14,7 @@ class CustomTextField extends StatefulWidget {
   final String? labelText;
   final Widget? suffixIcon;
 
-  CustomTextField({
+  const CustomTextField({super.key, 
     required this.controller,
     required this.hintText,
     this.hintStyle,

@@ -6,6 +6,7 @@ class TextConstant {
   static const String star = "*";
   static const String email = "Email";
   static const String password ="Password";
+  // ignore: constant_identifier_names
   static const String Enter ="Enter";
   static const String forgetPassword = "Forget Password?";
   static const String login ="Login";
