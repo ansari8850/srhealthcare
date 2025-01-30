@@ -1,253 +1,257 @@
-
+import 'dart:convert';
 
 class LoginResModel {
-    bool error;
-    String message;
-    String accessToken;
-    int status;
-    bool verify;
-    Result result;
+  bool error;
+  String message;
+  String accessToken;
+  int status;
+  bool verify;
+  UserModel result;
 
-    LoginResModel({
-        required this.error,
-        required this.message,
-        required this.accessToken,
-        required this.status,
-        required this.verify,
-        required this.result,
-    });
+  LoginResModel({
+    required this.error,
+    required this.message,
+    required this.accessToken,
+    required this.status,
+    required this.verify,
+    required this.result,
+  });
 
-    LoginResModel copyWith({
-        bool? error,
-        String? message,
-        String? accessToken,
-        int? status,
-        bool? verify,
-        Result? result,
-    }) => 
-        LoginResModel(
-            error: error ?? this.error,
-            message: message ?? this.message,
-            accessToken: accessToken ?? this.accessToken,
-            status: status ?? this.status,
-            verify: verify ?? this.verify,
-            result: result ?? this.result,
-        );
+  LoginResModel copyWith({
+    bool? error,
+    String? message,
+    String? accessToken,
+    int? status,
+    bool? verify,
+    UserModel? result,
+  }) =>
+      LoginResModel(
+        error: error ?? this.error,
+        message: message ?? this.message,
+        accessToken: accessToken ?? this.accessToken,
+        status: status ?? this.status,
+        verify: verify ?? this.verify,
+        result: result ?? this.result,
+      );
 
-    factory LoginResModel.fromJson(Map<String, dynamic> json) => LoginResModel(
+  factory LoginResModel.fromRawJson(String str) =>
+      LoginResModel.fromJson(json.decode(str));
+  String toRawJson() => json.encode(toJson());
+
+  factory LoginResModel.fromJson(Map<String, dynamic> json) => LoginResModel(
         error: json["error"],
         message: json["message"],
         accessToken: json["access_token"],
         status: json["status"],
         verify: json["verify"],
-        result: Result.fromJson(json["result"]),
-    );
+        result: UserModel.fromJson(json["result"]),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "error": error,
         "message": message,
         "access_token": accessToken,
         "status": status,
         "verify": verify,
         "result": result.toJson(),
-    };
+      };
 }
 
-class Result {
-    int id;
-    String name;
-    String lastName;
-    String mobileNo;
-    String loginType;
-    String department;
-    String email;
-    dynamic contactPersonName;
-    String userTypeId;
-    dynamic workPhone;
-    String field;
-    String displayName;
-    dynamic businessLeagalName;
-    dynamic taxPreference;
-    dynamic gstNo;
-    dynamic panNo;
-    dynamic website;
-    dynamic registrationType;
-    String bio;
-    dynamic subField;
-    String emrMobileNo;
-    String photo;
-    String education;
-    String address;
-    dynamic remark;
-    String attachments;
-    int isDisabled;
-    String password;
-    String cPassword;
-    String userType;
-    String countryId;
-    dynamic date;
-    String stateId;
-    String cityId;
-    String street1;
-    String street2;
-    String zipCode;
-    dynamic companyName;
-    dynamic contactPerson;
-    String status;
-    dynamic workEmail;
-    String fieldName;
-    int otp;
-    String otpVerify;
-    DateTime createdAt;
-    DateTime updatedAt;
+class UserModel {
+  int id;
+  String name;
+  String lastName;
+  String mobileNo;
+  String loginType;
+  String department;
+  String email;
+  dynamic contactPersonName;
+  String userTypeId;
+  dynamic workPhone;
+  String field;
+  String displayName;
+  dynamic businessLeagalName;
+  dynamic taxPreference;
+  dynamic gstNo;
+  dynamic panNo;
+  dynamic website;
+  dynamic registrationType;
+  String bio;
+  dynamic subField;
+  String emrMobileNo;
+  String photo;
+  String education;
+  String address;
+  dynamic remark;
+  String attachments;
+  int isDisabled;
+  String password;
+  String cPassword;
+  String userType;
+  String countryId;
+  dynamic date;
+  String stateId;
+  String cityId;
+  String street1;
+  String street2;
+  String zipCode;
+  dynamic companyName;
+  dynamic contactPerson;
+  String status;
+  dynamic workEmail;
+  String fieldName;
+  int otp;
+  String otpVerify;
+  DateTime createdAt;
+  DateTime updatedAt;
 
-    Result({
-        required this.id,
-        required this.name,
-        required this.lastName,
-        required this.mobileNo,
-        required this.loginType,
-        required this.department,
-        required this.email,
-        required this.contactPersonName,
-        required this.userTypeId,
-        required this.workPhone,
-        required this.field,
-        required this.displayName,
-        required this.businessLeagalName,
-        required this.taxPreference,
-        required this.gstNo,
-        required this.panNo,
-        required this.website,
-        required this.registrationType,
-        required this.bio,
-        required this.subField,
-        required this.emrMobileNo,
-        required this.photo,
-        required this.education,
-        required this.address,
-        required this.remark,
-        required this.attachments,
-        required this.isDisabled,
-        required this.password,
-        required this.cPassword,
-        required this.userType,
-        required this.countryId,
-        required this.date,
-        required this.stateId,
-        required this.cityId,
-        required this.street1,
-        required this.street2,
-        required this.zipCode,
-        required this.companyName,
-        required this.contactPerson,
-        required this.status,
-        required this.workEmail,
-        required this.fieldName,
-        required this.otp,
-        required this.otpVerify,
-        required this.createdAt,
-        required this.updatedAt,
-    });
+  UserModel({
+    required this.id,
+    required this.name,
+    required this.lastName,
+    required this.mobileNo,
+    required this.loginType,
+    required this.department,
+    required this.email,
+    required this.contactPersonName,
+    required this.userTypeId,
+    required this.workPhone,
+    required this.field,
+    required this.displayName,
+    required this.businessLeagalName,
+    required this.taxPreference,
+    required this.gstNo,
+    required this.panNo,
+    required this.website,
+    required this.registrationType,
+    required this.bio,
+    required this.subField,
+    required this.emrMobileNo,
+    required this.photo,
+    required this.education,
+    required this.address,
+    required this.remark,
+    required this.attachments,
+    required this.isDisabled,
+    required this.password,
+    required this.cPassword,
+    required this.userType,
+    required this.countryId,
+    required this.date,
+    required this.stateId,
+    required this.cityId,
+    required this.street1,
+    required this.street2,
+    required this.zipCode,
+    required this.companyName,
+    required this.contactPerson,
+    required this.status,
+    required this.workEmail,
+    required this.fieldName,
+    required this.otp,
+    required this.otpVerify,
+    required this.createdAt,
+    required this.updatedAt,
+  });
 
-    Result copyWith({
-        int? id,
-        String? name,
-        String? lastName,
-        String? mobileNo,
-        String? loginType,
-        String? department,
-        String? email,
-        dynamic contactPersonName,
-        String? userTypeId,
-        dynamic workPhone,
-        String? field,
-        String? displayName,
-        dynamic businessLeagalName,
-        dynamic taxPreference,
-        dynamic gstNo,
-        dynamic panNo,
-        dynamic website,
-        dynamic registrationType,
-        String? bio,
-        dynamic subField,
-        String? emrMobileNo,
-        String? photo,
-        String? education,
-        String? address,
-        dynamic remark,
-        String? attachments,
-        int? isDisabled,
-        String? password,
-        String? cPassword,
-        String? userType,
-        String? countryId,
-        dynamic date,
-        String? stateId,
-        String? cityId,
-        String? street1,
-        String? street2,
-        String? zipCode,
-        dynamic companyName,
-        dynamic contactPerson,
-        String? status,
-        dynamic workEmail,
-        String? fieldName,
-        int? otp,
-        String? otpVerify,
-        DateTime? createdAt,
-        DateTime? updatedAt,
-    }) => 
-        Result(
-            id: id ?? this.id,
-            name: name ?? this.name,
-            lastName: lastName ?? this.lastName,
-            mobileNo: mobileNo ?? this.mobileNo,
-            loginType: loginType ?? this.loginType,
-            department: department ?? this.department,
-            email: email ?? this.email,
-            contactPersonName: contactPersonName ?? this.contactPersonName,
-            userTypeId: userTypeId ?? this.userTypeId,
-            workPhone: workPhone ?? this.workPhone,
-            field: field ?? this.field,
-            displayName: displayName ?? this.displayName,
-            businessLeagalName: businessLeagalName ?? this.businessLeagalName,
-            taxPreference: taxPreference ?? this.taxPreference,
-            gstNo: gstNo ?? this.gstNo,
-            panNo: panNo ?? this.panNo,
-            website: website ?? this.website,
-            registrationType: registrationType ?? this.registrationType,
-            bio: bio ?? this.bio,
-            subField: subField ?? this.subField,
-            emrMobileNo: emrMobileNo ?? this.emrMobileNo,
-            photo: photo ?? this.photo,
-            education: education ?? this.education,
-            address: address ?? this.address,
-            remark: remark ?? this.remark,
-            attachments: attachments ?? this.attachments,
-            isDisabled: isDisabled ?? this.isDisabled,
-            password: password ?? this.password,
-            cPassword: cPassword ?? this.cPassword,
-            userType: userType ?? this.userType,
-            countryId: countryId ?? this.countryId,
-            date: date ?? this.date,
-            stateId: stateId ?? this.stateId,
-            cityId: cityId ?? this.cityId,
-            street1: street1 ?? this.street1,
-            street2: street2 ?? this.street2,
-            zipCode: zipCode ?? this.zipCode,
-            companyName: companyName ?? this.companyName,
-            contactPerson: contactPerson ?? this.contactPerson,
-            status: status ?? this.status,
-            workEmail: workEmail ?? this.workEmail,
-            fieldName: fieldName ?? this.fieldName,
-            otp: otp ?? this.otp,
-            otpVerify: otpVerify ?? this.otpVerify,
-            createdAt: createdAt ?? this.createdAt,
-            updatedAt: updatedAt ?? this.updatedAt,
-        );
+  UserModel copyWith({
+    int? id,
+    String? name,
+    String? lastName,
+    String? mobileNo,
+    String? loginType,
+    String? department,
+    String? email,
+    dynamic contactPersonName,
+    String? userTypeId,
+    dynamic workPhone,
+    String? field,
+    String? displayName,
+    dynamic businessLeagalName,
+    dynamic taxPreference,
+    dynamic gstNo,
+    dynamic panNo,
+    dynamic website,
+    dynamic registrationType,
+    String? bio,
+    dynamic subField,
+    String? emrMobileNo,
+    String? photo,
+    String? education,
+    String? address,
+    dynamic remark,
+    String? attachments,
+    int? isDisabled,
+    String? password,
+    String? cPassword,
+    String? userType,
+    String? countryId,
+    dynamic date,
+    String? stateId,
+    String? cityId,
+    String? street1,
+    String? street2,
+    String? zipCode,
+    dynamic companyName,
+    dynamic contactPerson,
+    String? status,
+    dynamic workEmail,
+    String? fieldName,
+    int? otp,
+    String? otpVerify,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) =>
+      UserModel(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        lastName: lastName ?? this.lastName,
+        mobileNo: mobileNo ?? this.mobileNo,
+        loginType: loginType ?? this.loginType,
+        department: department ?? this.department,
+        email: email ?? this.email,
+        contactPersonName: contactPersonName ?? this.contactPersonName,
+        userTypeId: userTypeId ?? this.userTypeId,
+        workPhone: workPhone ?? this.workPhone,
+        field: field ?? this.field,
+        displayName: displayName ?? this.displayName,
+        businessLeagalName: businessLeagalName ?? this.businessLeagalName,
+        taxPreference: taxPreference ?? this.taxPreference,
+        gstNo: gstNo ?? this.gstNo,
+        panNo: panNo ?? this.panNo,
+        website: website ?? this.website,
+        registrationType: registrationType ?? this.registrationType,
+        bio: bio ?? this.bio,
+        subField: subField ?? this.subField,
+        emrMobileNo: emrMobileNo ?? this.emrMobileNo,
+        photo: photo ?? this.photo,
+        education: education ?? this.education,
+        address: address ?? this.address,
+        remark: remark ?? this.remark,
+        attachments: attachments ?? this.attachments,
+        isDisabled: isDisabled ?? this.isDisabled,
+        password: password ?? this.password,
+        cPassword: cPassword ?? this.cPassword,
+        userType: userType ?? this.userType,
+        countryId: countryId ?? this.countryId,
+        date: date ?? this.date,
+        stateId: stateId ?? this.stateId,
+        cityId: cityId ?? this.cityId,
+        street1: street1 ?? this.street1,
+        street2: street2 ?? this.street2,
+        zipCode: zipCode ?? this.zipCode,
+        companyName: companyName ?? this.companyName,
+        contactPerson: contactPerson ?? this.contactPerson,
+        status: status ?? this.status,
+        workEmail: workEmail ?? this.workEmail,
+        fieldName: fieldName ?? this.fieldName,
+        otp: otp ?? this.otp,
+        otpVerify: otpVerify ?? this.otpVerify,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+      );
 
-    factory Result.fromJson(Map<String, dynamic> json) => Result(
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         id: json["id"],
         name: json["name"],
         lastName: json["last_name"],
@@ -294,9 +298,9 @@ class Result {
         otpVerify: json["otp_verify"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "last_name": lastName,
@@ -343,5 +347,5 @@ class Result {
         "otp_verify": otpVerify,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-    };
+      };
 }

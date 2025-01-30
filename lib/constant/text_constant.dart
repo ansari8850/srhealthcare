@@ -1,6 +1,6 @@
 class TextConstant {
   static const String welcomeText = "Welcome";
-  static const String handEmoji = "✋";
+  static const String handEmoji = "👋";
   static const String loginMessage =
       'Log In to enjoy healthy posting and events\naround the world';
   static const String star = "*";
