@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:srhealthcare/model/post_model.dart';
 import 'package:srhealthcare/services/sharedprefrence_helper.dart';
 import 'package:http/http.dart' as http;
@@ -16,7 +15,8 @@ class PostService {
   PostService() {
     bearerToken = 'Bearer $tokken';
   }
-  Future<(String? error, PostModel?)> fetchPosts({
+
+  Future<(String? error, List<PostListModel>?)> fetchPosts({
     String search = '',
     String customDate = '',
     String fromDate = '',
@@ -27,8 +27,8 @@ class PostService {
     String location = '',
     String date = '',
     String status = '',
-   required int currentPage , // New parameter for pagination
-   required int noOfRec , // New parameter for pagination
+    required int currentPage,
+    required int noOfRec,
   }) async {
     try {
       final body = {
@@ -42,11 +42,12 @@ class PostService {
         'location': location,
         'date': date,
         'status': status,
-        'currentpage': currentPage, // Added for pagination
-        'noofrec': noOfRec, // Added for pagination
+        'currentpage': currentPage,
+        'noofrec': noOfRec,
       };
-      print(bearerToken);
-      print('bearerToken');
+
+      log("Bearer Token: $bearerToken");
+
       final response = await http.post(
         Uri.parse(apiUrl),
         headers: {
@@ -55,13 +56,18 @@ class PostService {
         },
         body: json.encode(body),
       );
+
       final rawJson = jsonDecode(response.body);
       final message = rawJson['message'];
-      log(response.body);
+      log("Response: ${response.body}");
 
       if (response.statusCode == 200) {
-        final data = PostModel.fromJson(json.decode(response.body));
-        return (null, data);
+        /// ✅ Extract the list of posts from `data`
+        List<PostListModel> posts = (rawJson['data'] as List?)
+            ?.map((item) => PostListModel.fromJson(item))
+            .toList() ?? [];
+
+        return (null, posts); // ✅ Return list of `PostListModel`
       } else {
         return (message.toString(), null);
       }
@@ -69,4 +75,38 @@ class PostService {
       return ('$e', null);
     }
   }
+
+Future<List<String>> fetchPostTypeList() async {
+  final token = SharedPreferenceHelper().getAccessToken();
+  final url = Uri.parse(
+      'https://backend.srhealthcarecommunity.com/api/master/post_type_list');
+
+  try {
+    final response = await http.post(
+      url,
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final jsonResponse = jsonDecode(response.body);
+      log(response.body);
+
+      // Fetch post types from response and return as a list of strings
+      final postTypes = (jsonResponse['post_type_list'] as List)
+          .map((e) => e['name'] as String)
+          .toSet()
+          .toList(); // Remove duplicates if any
+      return postTypes;
+    } else {
+      final errorResponse = jsonDecode(response.body);
+      log(errorResponse['message'] ?? 'Unknown error');
+    }
+  } catch (e) {
+    log('Error fetching post types: $e');
+  }
+  return [];
+}
 }

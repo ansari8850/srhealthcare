@@ -5,6 +5,7 @@ import 'package:srhealthcare/pages/authPage/login_page.dart';
 import 'package:srhealthcare/pages/bottomNavigation/bottom_navigation.dart'; // Import BottomNavigation
 import 'package:srhealthcare/pages/bottomNavigation/management/bottomNavigation_bloc.dart';
 import 'package:srhealthcare/services/authApiService/login_api_service.dart';
+import 'package:srhealthcare/services/dropDownService/home_page_dropdown.dart';
 import 'package:srhealthcare/services/sharedprefrence_helper.dart';
 
 import 'pages/homePage/homePage_Tools/bloc/dropdown_bloc.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
           create: (context) => LoginBloc(LoginApiService()),
         ),
         BlocProvider<DropdownBloc>(
-          create: (context) => DropdownBloc(),
+          create: (context) => DropdownBloc(apiService: HomePageDropdown()),
         ),
       ],
       child: MaterialApp(

@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:srhealthcare/model/photo_model.dart';
+
 class LoginResModel {
   bool error;
   String message;
@@ -79,7 +81,7 @@ class UserModel {
   String bio;
   dynamic subField;
   String emrMobileNo;
-  String photo;
+  PhotoModel? photo;
   String education;
   String address;
   dynamic remark;
@@ -176,7 +178,7 @@ class UserModel {
     String? bio,
     dynamic subField,
     String? emrMobileNo,
-    String? photo,
+    PhotoModel? photo,
     String? education,
     String? address,
     dynamic remark,
@@ -273,7 +275,13 @@ class UserModel {
         bio: json["bio"],
         subField: json["sub_field"],
         emrMobileNo: json["emr_mobile_no"],
-        photo: json["photo"],
+        photo: json["photo"] == null || json["photo"] == ""
+            ? null
+            : PhotoModel.fromJson(
+                json["photo"] is String
+                    ? jsonDecode(json["photo"])
+                    : json["photo"],
+              ),
         education: json["education"],
         address: json["address"],
         remark: json["remark"],
@@ -322,7 +330,7 @@ class UserModel {
         "bio": bio,
         "sub_field": subField,
         "emr_mobile_no": emrMobileNo,
-        "photo": photo,
+        "photo": photo?.toJson(),
         "education": education,
         "address": address,
         "remark": remark,

@@ -36,9 +36,14 @@ class _DropdownExampleState extends State<DropdownExample> {
             children: [
               const Icon(Icons.location_on, size: 18, color: Colors.white),
               const SizedBox(width: 10),
-              Expanded(
-                flex: 1,
+              Flexible(
+                fit: FlexFit.tight,
                 child: DropdownButtonFormField<String>(
+                  borderRadius: BorderRadius.circular(10),
+                   alignment: Alignment.topLeft,
+                  elevation: 0,
+                  isDense: true,
+                  isExpanded: true,
                   value: state.selectedItem,
                   items: state.dropdownItems.map((item) => DropdownMenuItem<String>(
                     value: item,

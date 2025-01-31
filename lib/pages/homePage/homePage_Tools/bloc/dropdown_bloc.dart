@@ -1,17 +1,16 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:srhealthcare/pages/homePage/homePage_Tools/bloc/dropdown_event.dart';
 import 'package:srhealthcare/pages/homePage/homePage_Tools/bloc/dropdown_state.dart';
-import 'package:srhealthcare/pages/homePage/home_page.dart';
 import 'package:srhealthcare/services/dropDownService/home_page_dropdown.dart';
 
 class DropdownBloc extends Bloc<DropdownEvent, DropdownState> {
-  final HomePageDropdown? apiService;
+  final HomePageDropdown apiService;
 
-  DropdownBloc({this.apiService}) : super(DropdownInitial()) {
+  DropdownBloc({required this.apiService}) : super(DropdownInitial()) {
     on<FetchDropdownData>((event, emit) async {
       emit(DropdownLoading());
       try {
-        final response = await apiService?.fethInitialData('location');
+       final response = await apiService?.fethInitialData('location');
         if (response != null && response.masterList != null) {
           final dropdownItems = ["All", ...response.masterList!
               .where((item) => item.status == 'Active')

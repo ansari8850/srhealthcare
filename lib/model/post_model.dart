@@ -1,6 +1,39 @@
-  import 'dart:convert';
-
+import 'dart:convert';
 import 'package:srhealthcare/model/login_user_model.dart';
+
+class PostListModel {
+  List<PostModel>? postList;
+  int? count;
+  String? message;
+
+  PostListModel({
+    this.postList,
+    this.count,
+    this.message,
+  });
+
+  factory PostListModel.fromRawJson(String str) =>
+      PostListModel.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory PostListModel.fromJson(Map<String, dynamic> json) => PostListModel(
+        postList: json["postList"] == null
+            ? []
+            : List<PostModel>.from(
+                json["postList"]!.map((x) => PostModel.fromJson(x))),
+        count: json["count"],
+        message: json["message"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "postList": postList == null
+            ? []
+            : List<dynamic>.from(postList!.map((x) => x.toJson())),
+        "count": count,
+        "message": message,
+      };
+}
 
 class PostModel {
   int? id;
@@ -44,8 +77,7 @@ class PostModel {
       this.postTypeId,
       this.user,
       this.isSaved,
-      this.rejectedReason
-      });
+      this.rejectedReason});
 
   factory PostModel.fromRawJson(String str) =>
       PostModel.fromJson(json.decode(str));
@@ -53,33 +85,32 @@ class PostModel {
   String toRawJson() => json.encode(toJson());
 
   factory PostModel.fromJson(Map<String, dynamic> json) => PostModel(
-        id: json["id"],
-        userId: json["user_id"],
-        userName: json["user_name"],
-        fieldId: json["field_id"],
-        postType: json["post_type"] == null
-            ? null
-            : PostType.fromJson(json["post_type"]),
-        fieldName: json["field_name"],
-        title: json["title"],
-        location: json["location"],
-        date: json["date"],
-        description: json["description"],
-        thumbnail: json["thumbnail"],
-        autoDeleteDate: json["auto_delete_date"],
-        status: json["status"],
-        isDisabled: json["is_disabled"],
-        createdAt: json["created_at"] == null
-            ? null
-            : DateTime.parse(json["created_at"]),
-        updatedAt: json["updated_at"] == null
-            ? null
-            : DateTime.parse(json["updated_at"]),
-        postTypeId: json["post_type_id"],
-        user: json["user"] == null ? null : UserModel.fromJson(json["user"]),
-        isSaved: json["is_saved"],
-        rejectedReason: json["rejected_reason"]
-      );
+      id: json["id"],
+      userId: json["user_id"],
+      userName: json["user_name"],
+      fieldId: json["field_id"],
+      postType: json["post_type"] == null
+          ? null
+          : PostType.fromJson(json["post_type"]),
+      fieldName: json["field_name"],
+      title: json["title"],
+      location: json["location"],
+      date: json["date"],
+      description: json["description"],
+      thumbnail: json["thumbnail"],
+      autoDeleteDate: json["auto_delete_date"],
+      status: json["status"],
+      isDisabled: json["is_disabled"],
+      createdAt: json["created_at"] == null
+          ? null
+          : DateTime.parse(json["created_at"]),
+      updatedAt: json["updated_at"] == null
+          ? null
+          : DateTime.parse(json["updated_at"]),
+      postTypeId: json["post_type_id"],
+      user: json["user"] == null ? null : UserModel.fromJson(json["user"]),
+      isSaved: json["is_saved"],
+      rejectedReason: json["rejected_reason"]);
 
   Map<String, dynamic> toJson() => {
         "id": id,
@@ -101,7 +132,7 @@ class PostModel {
         "post_type_id": postTypeId,
         "user": user?.toJson(),
         "is_saved": isSaved,
-        "rejected_reason" :rejectedReason
+        "rejected_reason": rejectedReason
       };
 }
 
