@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class TimeAgoCustomWidget extends StatelessWidget {
   final String createdAt;
-  double size ;
+  final double size ;
 
    TimeAgoCustomWidget({super.key, required this.createdAt , this.size=14});
 

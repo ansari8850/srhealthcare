@@ -51,7 +51,7 @@ class NameNotificationSavedPost extends StatelessWidget {
         Row(
           children: [
             CircleAvatar(
-              backgroundColor: whiteColor.withOpacity(.2),
+              backgroundColor: ColorConstant. whiteColor.withOpacity(.2),
               child: Stack(
                 clipBehavior: Clip.none,
                 children: [
@@ -60,7 +60,7 @@ class NameNotificationSavedPost extends StatelessWidget {
                       Get.to(const NotificationPage());
                     },
                     child:  Icon(Icons.notifications_none_outlined,
-                        color: whiteColor , size: 20,),
+                        color:  ColorConstant.whiteColor , size: 20,),
                   ),
                   Positioned(
                       right: -3,
@@ -74,7 +74,7 @@ class NameNotificationSavedPost extends StatelessWidget {
                           child: Text(
                             '2',
                             style: GoogleFonts.poppins(
-                                color: whiteColor,
+                                color:  ColorConstant.whiteColor,
                                 fontSize: 7,
                                 fontWeight: FontWeight.w600),
                           )))
@@ -89,7 +89,7 @@ class NameNotificationSavedPost extends StatelessWidget {
               child: CircleAvatar(
                 backgroundColor: Colors.white.withOpacity(0.2),
                 child:  Icon(Icons.bookmark_border_outlined,
-                    color: whiteColor , size: 18,),
+                    color:  ColorConstant.whiteColor , size: 18,),
               ),
             ),
           ],

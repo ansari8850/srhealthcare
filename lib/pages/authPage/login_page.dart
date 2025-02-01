@@ -12,6 +12,8 @@ import 'package:srhealthcare/pages/authPage/forget_password.dart';
 import 'package:srhealthcare/pages/bottomNavigation/bottom_navigation.dart';
 import 'package:srhealthcare/services/authApiService/login_api_service.dart';
 
+import '../../generated/l10n.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -34,10 +36,10 @@ class _LoginPageState extends State<LoginPage> {
     return BlocProvider<LoginBloc>(
       create: (context) => LoginBloc(LoginApiService()),
       child: Scaffold(
-        backgroundColor: whiteColor,
+        backgroundColor:ColorConstant. whiteColor,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: whiteColor,
+          backgroundColor:ColorConstant. whiteColor,
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -47,14 +49,14 @@ class _LoginPageState extends State<LoginPage> {
                 text: "${TextConstant.welcomeText} ${TextConstant.handEmoji}",
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: blackColor,
+                color: ColorConstant.blackColor,
               ),
               const SizedBox(height: 8),
               CustomText(
                 text: TextConstant.loginMessage,
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
-                color: greyColor,
+                color: ColorConstant.greyColor,
               ),
               const SizedBox(height: 25),
               RichText(
@@ -63,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                   style: GoogleFonts.poppins(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: blackColor,
+                    color:  ColorConstant.blackColor,
                   ),
                   children: [
                     TextSpan(
@@ -71,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                       style: GoogleFonts.poppins(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
-                        color: redColor,
+                        color: ColorConstant. redColor,
                       ),
                     ),
                   ],
@@ -86,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                   style: GoogleFonts.poppins(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: blackColor,
+                    color:  ColorConstant.blackColor,
                   ),
                   children: [
                     TextSpan(
@@ -94,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                       style: GoogleFonts.poppins(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
-                        color: redColor,
+                        color:  ColorConstant.redColor,
                       ),
                     ),
                   ],
@@ -119,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                     text: TextConstant.forgetPassword,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: mainColor,
+                    color: ColorConstant. mainColor,
                   ),
                 ),
               ),
@@ -178,14 +180,15 @@ class _LoginPageState extends State<LoginPage> {
                       height: 50,
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
-                        color: mainColor,
+                        color:ColorConstant.mainColor,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Center(
                         child: CustomText(
                           text: TextConstant.login,
+                          // text: S.current,
                           fontSize: 16,
-                          color: whiteColor,
+                          color: ColorConstant.whiteColor,
                           fontWeight: FontWeight.w500,
                         ),
                       ),

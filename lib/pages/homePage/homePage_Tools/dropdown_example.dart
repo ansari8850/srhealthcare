@@ -62,7 +62,7 @@ class _DropdownExampleState extends State<DropdownExample> {
                   },
                   decoration: InputDecoration(border: InputBorder.none),
                   icon: SizedBox.shrink(),
-                  dropdownColor: mainColor,
+                  dropdownColor: ColorConstant. mainColor,
                   style: GoogleFonts.poppins(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,

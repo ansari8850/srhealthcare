@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:srhealthcare/generated/l10n.dart';
 import 'package:srhealthcare/pages/authPage/bloc/login_bloc.dart';
 import 'package:srhealthcare/pages/authPage/login_page.dart';
 import 'package:srhealthcare/pages/bottomNavigation/bottom_navigation.dart'; // Import BottomNavigation
@@ -34,6 +35,9 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        localizationsDelegates: const [
+                    S.delegate,
+                  ],
         themeMode: ThemeMode.system,
         debugShowCheckedModeBanner: false,
         title: 'SR Healthcare',

@@ -52,7 +52,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       margin: widget.margin ?? EdgeInsets.only(top: 7),
       padding: widget.padding ?? EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
-        border: Border.all(color: greyColor.withOpacity(.3)),
+        border: Border.all(color:  ColorConstant.greyColor.withOpacity(.3)),
         borderRadius: BorderRadius.circular(8),
       ),
       child: TextField(
@@ -68,14 +68,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
               GoogleFonts.poppins(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
-                color: greyColor,
+                color: ColorConstant.greyColor,
               ),
           suffixIcon: widget.obscureText
               ? IconButton(
                 splashColor: Colors.transparent,
                   icon: Icon(
                     _obscureText ? Icons.visibility_off : Icons.visibility ,
-                    color: greyColor,
+                    color: ColorConstant.greyColor,
                   ),
                   onPressed: _toggleObscureText,
                 )

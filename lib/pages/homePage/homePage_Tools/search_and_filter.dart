@@ -42,7 +42,7 @@ class SearchAndFilterWidget extends StatelessWidget {
                       text: TextConstant.searchBarHintText,
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: greyColor,
+                      color:  ColorConstant.greyColor,
                     )
                   ],
                 )),

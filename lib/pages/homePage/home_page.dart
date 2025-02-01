@@ -207,10 +207,10 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       CircleAvatar(
                         radius: 26,
-                        backgroundColor: gradientColor1,
+                        backgroundColor: ColorConstant. gradientColor1,
                         child: CircleAvatar(
                           radius: 25,
-                          backgroundColor: gradientColor1,
+                          backgroundColor:  ColorConstant.gradientColor1,
                           child: AppCacheNetworkImage(
                             width: Get.width,
                             borderRadius: 50,
@@ -233,7 +233,7 @@ class _HomePageState extends State<HomePage> {
                                 text: post?.user?.department ?? '',
                                 fontSize: 10,
                                 fontWeight: FontWeight.w400,
-                                color: greyColorShade)
+                                color: ColorConstant. greyColorShade)
                           ],
                         ),
                       ),
@@ -333,10 +333,10 @@ Widget _buildTab(String title, bool isActive) {
         padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 15),
         margin: EdgeInsets.all(5),
         decoration: BoxDecoration(
-          color: isActive ? gradientColor1 : gradientColor1.withOpacity(.03),
+          color: isActive ?  ColorConstant.gradientColor1 :  ColorConstant.gradientColor1.withOpacity(.03),
           borderRadius: BorderRadius.circular(15),
         ),
-        child: CustomText(text: title ,color:  isActive ?whiteColor :blackColor , fontSize: 13 ,fontWeight: FontWeight.w500,)
+        child: CustomText(text: title ,color:  isActive ? ColorConstant.whiteColor : ColorConstant.blackColor , fontSize: 13 ,fontWeight: FontWeight.w500,)
         
       ),
     );
@@ -352,7 +352,7 @@ Widget _buildTab(String title, bool isActive) {
                 gradient: LinearGradient(
                     end: Alignment.bottomRight,
                     begin: Alignment.topLeft,
-                    colors: [gradientColor1, gradientColor2]),
+                    colors: [ ColorConstant.gradientColor1, ColorConstant. gradientColor2]),
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(10),
                     bottomRight: Radius.circular(10))),
@@ -380,7 +380,7 @@ Widget _buildTab(String title, bool isActive) {
         slivers: [
           SliverToBoxAdapter(
             child: postType.isEmpty
-            ?Center(child: CircularProgressIndicator( color: gradientColor1,  ),)
+            ?Center(child: CircularProgressIndicator( color: ColorConstant. gradientColor1,  ),)
             :SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(

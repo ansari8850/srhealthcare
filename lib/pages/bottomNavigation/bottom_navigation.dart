@@ -17,7 +17,8 @@ class BottomNavigation extends StatelessWidget {
       backgroundColor: Colors.white,
       body: BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
         builder: (context, state) {
-          int currentIndex = state is BottomNavigationInitial ? state.selectedIndex : 0;
+          int currentIndex =
+              state is BottomNavigationInitial ? state.selectedIndex : 0;
 
           final List<Widget> _pages = [
             const HomePage(),
@@ -31,13 +32,13 @@ class BottomNavigation extends StatelessWidget {
       ),
       bottomNavigationBar: Theme(
         data: ThemeData(
-          splashColor: Colors.transparent
-          , highlightColor: Colors.transparent
-        ),
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent),
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(15), topRight: Radius.circular(15)),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.1),
@@ -52,8 +53,9 @@ class BottomNavigation extends StatelessWidget {
             child: BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
               builder: (context, state) {
                 // Get the current selected index
-                int currentIndex = state is BottomNavigationInitial ? state.selectedIndex : 0;
-        
+                int currentIndex =
+                    state is BottomNavigationInitial ? state.selectedIndex : 0;
+
                 return BottomNavigationBar(
                   backgroundColor: Colors.white,
                   type: BottomNavigationBarType.fixed,
@@ -64,19 +66,24 @@ class BottomNavigation extends StatelessWidget {
                   iconSize: 24,
                   onTap: (index) {
                     // Dispatch the event to change the selected index
-                    context.read<BottomNavigationBloc>().add(BottomNavigationIndexChanged(index));
+                    context
+                        .read<BottomNavigationBloc>()
+                        .add(BottomNavigationIndexChanged(index));
                   },
                   items: [
                     BottomNavigationBarItem(
-                      icon: _buildNavigationItemIcon(context, currentIndex, 0, "assets/bottomnav/home.png"),
+                      icon: _buildNavigationItemIcon(context, currentIndex, 0,
+                          "assets/bottomnav/home.png"),
                       label: "Home",
                     ),
                     BottomNavigationBarItem(
-                      icon: _buildNavigationItemIcon(context, currentIndex, 1, "assets/bottomnav/search.png"),
+                      icon: _buildNavigationItemIcon(context, currentIndex, 1,
+                          "assets/bottomnav/search.png"),
                       label: "Search",
                     ),
                     BottomNavigationBarItem(
-                      icon: _buildNavigationItemIcon(context, currentIndex, 2, "assets/bottomnav/feed.png"),
+                      icon: _buildNavigationItemIcon(context, currentIndex, 2,
+                          "assets/bottomnav/feed.png"),
                       label: "Feed",
                     ),
                     BottomNavigationBarItem(
@@ -86,7 +93,9 @@ class BottomNavigation extends StatelessWidget {
                             height: 3,
                             width: 30,
                             decoration: BoxDecoration(
-                              color: currentIndex == 3 ? Colors.deepPurple : Colors.transparent,
+                              color: currentIndex == 3
+                                  ? Colors.deepPurple
+                                  : Colors.transparent,
                               borderRadius: const BorderRadius.only(
                                 bottomLeft: Radius.circular(10),
                                 bottomRight: Radius.circular(10),
@@ -96,7 +105,9 @@ class BottomNavigation extends StatelessWidget {
                           const SizedBox(height: 20),
                           Icon(
                             Icons.person,
-                            color: currentIndex == 3 ? Colors.deepPurple : Colors.grey,
+                            color: currentIndex == 3
+                                ? Colors.deepPurple
+                                : Colors.grey,
                           ),
                         ],
                       ),
@@ -112,7 +123,6 @@ class BottomNavigation extends StatelessWidget {
     );
   }
 
-  // Helper method to build the navigation item icon
   Widget _buildNavigationItemIcon(
       BuildContext context, int currentIndex, int itemIndex, String assetPath) {
     return Column(
@@ -121,7 +131,9 @@ class BottomNavigation extends StatelessWidget {
           height: 3,
           width: 30,
           decoration: BoxDecoration(
-            color: currentIndex == itemIndex ? Colors.deepPurple : Colors.transparent,
+            color: currentIndex == itemIndex
+                ? Colors.deepPurple
+                : Colors.transparent,
             borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(10),
               bottomRight: Radius.circular(10),
